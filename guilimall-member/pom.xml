@@ -19,12 +19,32 @@
     </properties>
     <dependencies>
         <dependency>
+            <groupId>com.swjtu.guilimall</groupId>
+            <artifactId>guilimall-common</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
+        <!--远程调用feign-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-openfeign</artifactId>
+        </dependency>
+        <!--引入负载均衡-->
+        <!--由于cloud的升级之后，openfeign不再带有Ribbon的jar包，
+            所以引入以下的jar包，做负载均衡-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-loadbalancer</artifactId>
+            <version>3.1.1</version>
+        </dependency>
+        <!--由于boot版本太高，在读取nacos config的配置文件时，
+            无法先加载bootstrap.yml，所以要引入此包-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-bootstrap</artifactId>
         </dependency>
 
         <dependency>

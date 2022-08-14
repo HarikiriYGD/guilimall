@@ -14,7 +14,11 @@
         <module>guilimall-member</module>
         <module>guilimall-coupon</module>
         <module>guilimall-order</module>
+        <module>renren-fast</module>
+        <module>renren-generator</module>
+        <module>guilimall-common</module>
     </modules>
+
 
 
 </project>
