@@ -1,0 +1,11 @@
+spring:
+  cloud:
+    nacos:
+      config:
+        server-addr: 192.168.196.1:8848
+        namespace: e7e82899-2b82-4b36-8905-ea6fd8a2496c
+        group: DEV_GROUP
+  application:
+    name: guilimall-gateway
+  profiles:
+    active: dev
