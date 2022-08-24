@@ -18,6 +18,7 @@
         <module>renren-generator</module>
         <module>guilimall-common</module>
         <module>guilimall-gateway</module>
+        <module>guilimall-third-party</module>
     </modules>
 
 

@@ -5,6 +5,16 @@ spring:
         server-addr: 192.168.196.1:8848
         file-extension: yaml
         group: DEV_GROUP
+        extension-configs:
+        - data-id: datasource.yaml
+          group: DEV_GROUP
+          refresh: true
+        - data-id: other.yaml
+          group: DEV_GROUP
+          refresh: true
+        - data-id: mybatisplus.yaml
+          group: DEV_GROUP
+          refresh: true
       discovery:
         server-addr: 192.168.196.1:8848
   application:

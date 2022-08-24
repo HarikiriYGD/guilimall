@@ -20,6 +20,7 @@
     <description>每一个微服务公共的部分</description>
 
     <dependencies>
+
         <!--引入nacos当做服务注册中心和配置中心-->
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
@@ -30,7 +31,6 @@
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
         </dependency>
-
 
         <!--mybatis-plus-->
         <dependency>
