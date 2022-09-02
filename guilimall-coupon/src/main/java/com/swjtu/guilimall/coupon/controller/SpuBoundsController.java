@@ -31,6 +31,7 @@ public class SpuBoundsController {
     @Autowired
     private SpuBoundsService spuBoundsService;
 
+
     /**
      * 列表
      */

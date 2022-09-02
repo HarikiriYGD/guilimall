@@ -5,6 +5,7 @@ import com.swjtu.guilimall.product.service.AttrService;
 import com.swjtu.guilimall.product.vo.AttrGroupWithAttrsVo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -44,7 +45,7 @@ public class AttrGroupServiceImpl extends ServiceImpl<AttrGroupDao, AttrGroupEnt
         String key = (String) params.get("key");
         // select * from pms_attr_group where catelog_id = ? and (attr_group_id = key or attr_group_name like key)
         QueryWrapper<AttrGroupEntity> wrapper = new QueryWrapper<AttrGroupEntity>();
-        if (!StringUtils.isEmpty(key)) {
+        if (StringUtils.hasLength(key)) {
             wrapper.and(obj -> {
                 obj.eq("attr_group_id", key).or().like("attr_group_name", key);
             });
@@ -57,6 +58,22 @@ public class AttrGroupServiceImpl extends ServiceImpl<AttrGroupDao, AttrGroupEnt
             wrapper.eq("catelog_id", catelogId);
             return new PageUtils(this.page(new Query<AttrGroupEntity>().getPage(params), wrapper));
         }
+    }
+
+    @Override
+    public List<AttrGroupWithAttrsVo> getAttrGroupWithAttrsByCatelogId(Long catelogId) {
+        // 1. 查询分组信息
+        List<AttrGroupEntity> attrGroupEntities = this.list(new QueryWrapper<AttrGroupEntity>().eq("catelog_id", catelogId));
+        // 2. 查询所有属性
+        List<AttrGroupWithAttrsVo> attrGroupWithAttrsVos = attrGroupEntities.stream().map(item -> {
+            AttrGroupWithAttrsVo attrsVo = new AttrGroupWithAttrsVo();
+            BeanUtils.copyProperties(item, attrsVo);
+            // 将属性封装进vo
+            List<AttrEntity> entities = attrService.getRelationAttr(attrsVo.getAttrGroupId());
+            attrsVo.setAttrs(entities);
+            return attrsVo;
+        }).collect(Collectors.toList());
+        return attrGroupWithAttrsVos;
     }
 
 

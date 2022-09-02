@@ -3,6 +3,7 @@ package com.swjtu.guilimall.product.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.swjtu.common.utils.PageUtils;
 import com.swjtu.guilimall.product.entity.AttrEntity;
+import com.swjtu.guilimall.product.entity.ProductAttrValueEntity;
 import com.swjtu.guilimall.product.vo.AttrGroupRelationVo;
 import com.swjtu.guilimall.product.vo.AttrRespVo;
 import com.swjtu.guilimall.product.vo.AttrVo;
@@ -34,5 +35,12 @@ public interface AttrService extends IService<AttrEntity> {
     void deleteRelation(AttrGroupRelationVo[] vos);
 
     PageUtils getNoRelationAttr(Map<String, Object> params, Long attrgroupId);
+
+    /**
+     * 在指定的所有属性集合里面，挑出检索属性
+     * @param attrIds
+     * @return
+     */
+    List<Long> selectSearchAttrIds(List<Long> attrIds);
 }
 

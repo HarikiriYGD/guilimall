@@ -3,6 +3,7 @@ package com.swjtu.guilimall.product.service.impl;
 import com.swjtu.guilimall.product.service.CategoryBrandRelationService;
 import org.checkerframework.checker.units.qual.A;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
@@ -22,7 +23,7 @@ import org.springframework.util.StringUtils;
 @Service("brandService")
 public class BrandServiceImpl extends ServiceImpl<BrandDao, BrandEntity> implements BrandService {
 
-    @Autowired
+    @Lazy
     private CategoryBrandRelationService categoryBrandRelationService;
 
     @Override

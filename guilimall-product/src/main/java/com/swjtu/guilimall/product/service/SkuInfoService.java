@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.swjtu.common.utils.PageUtils;
 import com.swjtu.guilimall.product.entity.SkuInfoEntity;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -16,5 +17,16 @@ import java.util.Map;
 public interface SkuInfoService extends IService<SkuInfoEntity> {
 
     PageUtils queryPage(Map<String, Object> params);
+
+    void saveSkuInfo(SkuInfoEntity skuInfoEntity);
+
+    PageUtils queryPageByCondition(Map<String, Object> params);
+
+    /**
+     * 根据spuId查询sku的信息
+     * @param spuId
+     * @return
+     */
+    List<SkuInfoEntity> getSkuBySpuId(Long spuId);
 }
 

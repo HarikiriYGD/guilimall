@@ -9,6 +9,23 @@ spring:
     name: guilimall-product
   profiles:
     active: dev
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+  # 模板解析引擎
+  thymeleaf:
+    cache: false
+    suffix: .html
+  redis:
+    host: 192.168.196.131
+    port: 6379
+  # 指定缓存类型
+  cache:
+    type: redis
+    redis:
+      time-to-live: 3600000ms
+      use-key-prefix: true
+      # 是否缓存空值，防止缓存穿透
+      cache-null-values: true
 
 # 配置mybatis-plus
 mybatis-plus:
@@ -26,3 +43,4 @@ server:
 logging:
   level:
     com.swjtu.guilimall: debug
+

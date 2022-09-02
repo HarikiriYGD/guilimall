@@ -3,7 +3,10 @@ package com.swjtu.guilimall.ware.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.swjtu.common.utils.PageUtils;
 import com.swjtu.guilimall.ware.entity.PurchaseEntity;
+import com.swjtu.guilimall.ware.vo.MergeVo;
+import com.swjtu.guilimall.ware.vo.PurchaseDoneVo;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -16,5 +19,25 @@ import java.util.Map;
 public interface PurchaseService extends IService<PurchaseEntity> {
 
     PageUtils queryPage(Map<String, Object> params);
+
+    PageUtils queryPageUnreceivePurchase(Map<String, Object> params);
+
+    /**
+     * 合并采购单
+     * @param vo
+     */
+    void mergePurchase(MergeVo vo);
+
+    /**
+     * 员工领取采购单
+     * @param ids
+     */
+    void received(List<Long> ids);
+
+    /**
+     * 完成采购单
+     * @param vo
+     */
+    void done(PurchaseDoneVo vo);
 }
 

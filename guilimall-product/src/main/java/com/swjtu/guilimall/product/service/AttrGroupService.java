@@ -27,5 +27,11 @@ public interface AttrGroupService extends IService<AttrGroupEntity> {
      */
     PageUtils queryPage(Map<String, Object> params, Long catelogId);
 
+    /**
+     * 根据分类id查询出所有的分组及组中的属性
+     * @param catelogId
+     * @return
+     */
+    List<AttrGroupWithAttrsVo> getAttrGroupWithAttrsByCatelogId(Long catelogId);
 }
 

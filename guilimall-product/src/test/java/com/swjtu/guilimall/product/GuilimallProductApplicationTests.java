@@ -5,10 +5,14 @@ import com.swjtu.guilimall.product.entity.BrandEntity;
 import com.swjtu.guilimall.product.service.BrandService;
 import com.swjtu.guilimall.product.service.CategoryService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.ibatis.annotations.Result;
 import org.junit.jupiter.api.Test;
+import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.redis.core.StringRedisTemplate;
 
+import javax.annotation.Resource;
 import java.util.Arrays;
 import java.util.List;
 
@@ -21,6 +25,23 @@ class GuilimallProductApplicationTests {
 
     @Autowired
     private CategoryService categoryService;
+
+    @Resource
+    private StringRedisTemplate stringRedisTemplate;
+
+    @Resource
+    private RedissonClient redissonClient;
+
+    @Test
+    void testRedisson(){
+        System.out.println(redissonClient);
+    }
+
+    @Test
+    void testRedis(){
+        String v1 = stringRedisTemplate.opsForValue().get("k1");
+        System.out.println(v1);
+    }
 
     @Test
     public void testFindPath() {

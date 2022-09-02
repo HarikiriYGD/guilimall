@@ -5,6 +5,14 @@ spring:
     password: 123456
     url: jdbc:mysql://192.168.196.131:3307/guilimall_wms
     driver-class-name: com.mysql.cj.jdbc.Driver
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.196.1:8848
+  application:
+    name: guilimall-ware
+  jackson:
+    date-format: yyyy-MM-dd HH:ss:mm
 
 # 配置mybatis-plus
 mybatis-plus:
@@ -17,3 +25,7 @@ mybatis-plus:
       id-type: auto
 server:
   port: 11000
+
+logging:
+  level:
+    com.swjtu: debug

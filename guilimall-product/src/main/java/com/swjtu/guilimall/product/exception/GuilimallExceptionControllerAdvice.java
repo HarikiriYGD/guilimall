@@ -16,7 +16,7 @@ import java.util.Map;
  * @Date: 2022/8/22 21:48
  * @Description: 集中处理所有异常
  */
-@RestControllerAdvice(basePackages = "com.swjtu.guilimall.product.controller")
+@RestControllerAdvice(basePackages = "com.swjtu.guilimall.product.app")
 @Slf4j
 public class GuilimallExceptionControllerAdvice {
 

@@ -4,9 +4,7 @@ import com.swjtu.common.constant.ProductConstant;
 import com.swjtu.guilimall.product.dao.AttrAttrgroupRelationDao;
 import com.swjtu.guilimall.product.dao.AttrGroupDao;
 import com.swjtu.guilimall.product.dao.CategoryDao;
-import com.swjtu.guilimall.product.entity.AttrAttrgroupRelationEntity;
-import com.swjtu.guilimall.product.entity.AttrGroupEntity;
-import com.swjtu.guilimall.product.entity.CategoryEntity;
+import com.swjtu.guilimall.product.entity.*;
 import com.swjtu.guilimall.product.service.CategoryService;
 import com.swjtu.guilimall.product.vo.AttrGroupRelationVo;
 import com.swjtu.guilimall.product.vo.AttrRespVo;
@@ -30,7 +28,6 @@ import com.swjtu.common.utils.PageUtils;
 import com.swjtu.common.utils.Query;
 
 import com.swjtu.guilimall.product.dao.AttrDao;
-import com.swjtu.guilimall.product.entity.AttrEntity;
 import com.swjtu.guilimall.product.service.AttrService;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
@@ -71,7 +68,7 @@ public class AttrServiceImpl extends ServiceImpl<AttrDao, AttrEntity> implements
         BeanUtils.copyProperties(attr, attrEntity);
         // 保存基本数据
         this.save(attrEntity);
-        if (attr.getAttrType() == ProductConstant.AttrEnum.ATTR_TYPE_BASE.getCode()) {
+        if (attr.getAttrType() == ProductConstant.AttrEnum.ATTR_TYPE_BASE.getCode() && attr.getAttrGroupId() != null) {
             // 保存关联关系
             AttrAttrgroupRelationEntity relationEntity = new AttrAttrgroupRelationEntity();
             relationEntity.setAttrGroupId(attr.getAttrGroupId());
@@ -108,7 +105,7 @@ public class AttrServiceImpl extends ServiceImpl<AttrDao, AttrEntity> implements
             // 1. 设置分类和分组的
             if ("base".equalsIgnoreCase(type)) {
                 AttrAttrgroupRelationEntity attrId = relationDao.selectOne(new QueryWrapper<AttrAttrgroupRelationEntity>().eq("attr_id", attr.getAttrId()));
-                if (attrId != null) {
+                if (attrId != null && attrId.getAttrGroupId() != null) {
                     AttrGroupEntity attrGroupEntity = attrGroupDao.selectById(attrId.getAttrGroupId());
                     attrRespVo.setGroupName(attrGroupEntity.getAttrGroupName());
                 }
@@ -253,5 +250,11 @@ public class AttrServiceImpl extends ServiceImpl<AttrDao, AttrEntity> implements
 
         return pageUtils;
     }
+
+    @Override
+    public List<Long> selectSearchAttrIds(List<Long> attrIds) {
+        return this.baseMapper.selectSearchAttrIds(attrIds);
+    }
+
 
 }
